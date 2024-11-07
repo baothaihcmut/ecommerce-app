@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:15 # You can specify the version, e.g., 'postgres:15'
+    container_name: postgres_container
+    environment:
+      POSTGRES_USER: admin         # Username for PostgreSQL
+      POSTGRES_PASSWORD: admin # Password for PostgreSQL
+      POSTGRES_DB: userdb       # Database name
+    ports:
+      - "5432:5432"                 # Expose PostgreSQL on port 5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # Persistent storage for data
+
+volumes:
+  postgres_data:
