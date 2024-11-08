@@ -1,12 +1,13 @@
 import CreateUserCommand from "../../../../application/command/create-user.command";
 import { CreateUserUC } from "../../../../application/usecase/create-user.usecase";
+import { USER_CREATE } from "../../../../common/constance";
 import { KafkaMessage } from "../interface/message.interface";
+import { AppRouter } from "../router/app.router";
 
 type HandleFunction = (message: KafkaMessage<any>) => Promise<void>;
-type EventType = "user.create";
 export class UserHandler {
-  private mapHandler: Record<EventType, HandleFunction> = {
-    "user.create": this.handleCreate,
+  private mapHandler: Record<string, HandleFunction> = {
+    USER_CREATE: this.handleCreate,
   };
   private createUserUC: CreateUserUC;
   constructor(createUserUC: CreateUserUC) {
@@ -22,7 +23,7 @@ export class UserHandler {
     }
   }
 
-  async handleMessage(topic: EventType, message: KafkaMessage<any>) {
-    await this.mapHandler[topic](message);
+  async initHandler(router:AppRouter) {
+    router.registerHandler(USER_CREATE,this.handleCreate);
   }
 }

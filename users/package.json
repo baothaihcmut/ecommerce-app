@@ -1,7 +1,8 @@
 {
   "name": "users",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "main.js",
+  "type": "commonjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,7 +17,11 @@
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
+    "dotenv": "^16.4.5",
+    "joi": "^17.13.3",
+    "kafkajs": "^2.2.4",
     "prisma": "^5.22.0",
+    "users": "file:",
     "uuid": "^11.0.2"
   }
 }
