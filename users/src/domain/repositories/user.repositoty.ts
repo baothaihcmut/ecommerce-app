@@ -1,9 +1,20 @@
-import { UUID } from 'crypto';
-import { User } from './../entities/user.entity';
+import { Customer, PrismaClient, Shipper, ShopOwner } from "@prisma/client";
+import { User } from "./../entities/user.entity";
 export default interface IUserRepository {
-    createUser(user:Omit<User,'id'|'customer'|'shipper'|'shopOwner'>):Promise<User>
-    deleteUser(id:string):Promise<void>
-    updateUser(id:string,user: Partial< Omit<User,'id'|'customer'|'shipper'|'shopOwner'>>):Promise<User>
-    findAllUser(offset:number, limit: number): Promise<User[]>
-    findUserByID(id:string):Promise<User>
+  createUser(
+    user: Omit<User, "id" | "customer" | "shipper" | "shopOwner">,
+    prisma?: PrismaClient
+  ): Promise<User>;
+  deleteUser(id: string, prisma?: PrismaClient): Promise<void>;
+  updateUser(
+    id: string,
+    user: Partial<User>,
+    prisma?: PrismaClient
+  ): Promise<User>;
+  findAllUser(
+    offset: number,
+    limit: number,
+    prisma?: PrismaClient
+  ): Promise<User[]>;
+  findUserByID(id: string, prisma?: PrismaClient): Promise<User>;
 }
