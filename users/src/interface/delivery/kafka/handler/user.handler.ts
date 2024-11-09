@@ -3,11 +3,7 @@ import { CreateUserUC } from "../../../../application/usecase/create-user.usecas
 import { KafkaMessage } from "../interface/message.interface";
 
 type HandleFunction = (message: KafkaMessage<any>) => Promise<void>;
-type EventType = "user.create";
 export class UserHandler {
-  private mapHandler: Record<EventType, HandleFunction> = {
-    "user.create": this.handleCreate,
-  };
   private createUserUC: CreateUserUC;
   constructor(createUserUC: CreateUserUC) {
     this.createUserUC = createUserUC;
@@ -20,9 +16,5 @@ export class UserHandler {
     } catch (e) {
       console.log(e);
     }
-  }
-
-  async handleMessage(topic: EventType, message: KafkaMessage<any>) {
-    await this.mapHandler[topic](message);
   }
 }
