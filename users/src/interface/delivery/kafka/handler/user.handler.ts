@@ -1,6 +1,8 @@
-import CreateUserCommand from "../../../../application/command/create-user.command";
-import { CreateUserUC } from "../../../../application/usecase/create-user.usecase";
-import { KafkaMessage } from "../interface/message.interface";
+import CreateUserCommand from "@app/application/command/create-user.command";
+import { CreateUserUC } from "@app/application/usecase/create-user.usecase";
+import { USER_CREATE } from "@app/common/constance";
+import { KafkaMessage } from "@app/interface/delivery/kafka/interface/message.interface";
+import { AppRouter } from "@app/interface/delivery/kafka/router/app.router";
 
 type HandleFunction = (message: KafkaMessage<any>) => Promise<void>;
 export class UserHandler {
@@ -16,5 +18,9 @@ export class UserHandler {
     } catch (e) {
       console.log(e);
     }
+  }
+
+  async initHandler(router: AppRouter) {
+    router.registerHandler(USER_CREATE, this.handleCreate);
   }
 }

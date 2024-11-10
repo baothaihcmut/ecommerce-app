@@ -1,9 +1,9 @@
-import { Customer } from "../../domain/entities/customer.entity";
-import { Gender } from "../../domain/entities/gender.enum";
-import { Role } from "../../domain/entities/role.enum";
-import { Shipper } from "../../domain/entities/shipper.entity";
-import { ShopOwner } from "../../domain/entities/shopowner.entity";
-import { User } from "../../domain/entities/user.entity";
+import { Customer } from "@app/domain/entities/customer.entity";
+import { Gender } from "@app/domain/entities/gender.enum";
+import { Role } from "@app/domain/entities/role.enum";
+import { Shipper } from "@app/domain/entities/shipper.entity";
+import { ShopOwner } from "@app/domain/entities/shopowner.entity";
+import { User } from "@app/domain/entities/user.entity";
 
 interface CustomerDetail {}
 interface ShipperDetail {

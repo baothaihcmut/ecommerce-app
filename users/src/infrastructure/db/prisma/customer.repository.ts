@@ -1,5 +1,5 @@
-import { Customer } from "../../../domain/entities/customer.entity"; // Adjust path as necessary
-import ICustomerRepository from "../../../domain/repositories/customer.repository"; // Adjust path as necessary
+import { Customer } from "@app/domain/entities/customer.entity"; // Adjust path as necessary
+import ICustomerRepository from "@app/domain/repositories/customer.repository"; // Adjust path as necessary
 import { PrismaClient } from "@prisma/client";
 
 export default class PrismaCustomerRepository implements ICustomerRepository {

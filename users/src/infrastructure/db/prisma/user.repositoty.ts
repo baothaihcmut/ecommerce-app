@@ -1,12 +1,12 @@
 import { UUID } from "crypto";
-import { User } from "../../../domain/entities/user.entity";
-import IUserRepository from "../../../domain/repositories/user.repositoty";
+import { User } from "@app/domain/entities/user.entity";
+import IUserRepository from "@app/domain/repositories/user.repositoty";
 import { PrismaClient } from "@prisma/client";
 import { v4 as uuidv4, validate } from "uuid";
-import { Role } from "../../../domain/entities/role.enum";
-import { Customer } from "../../../domain/entities/customer.entity";
-import { Shipper } from "../../../domain/entities/shipper.entity";
-import { ShopOwner } from "../../../domain/entities/shopowner.entity";
+import { Role } from "@app/domain/entities/role.enum";
+import { Customer } from "@app/domain/entities/customer.entity";
+import { Shipper } from "@app/domain/entities/shipper.entity";
+import { ShopOwner } from "@app/domain/entities/shopowner.entity";
 
 export default class PrismaUserRepository implements IUserRepository {
   private prismaClient: PrismaClient;

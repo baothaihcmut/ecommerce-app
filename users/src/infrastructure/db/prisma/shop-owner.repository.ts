@@ -1,5 +1,5 @@
-import { ShopOwner } from "../../../domain/entities/shopowner.entity"; // Adjust path as necessary
-import IShopOwnerRepository from "../../../domain/repositories/shop-owner.repository"; // Adjust path as necessary
+import { ShopOwner } from "@app/domain/entities/shopowner.entity"; // Adjust path as necessary
+import IShopOwnerRepository from "@app/domain/repositories/shop-owner.repository"; // Adjust path as necessary
 import { PrismaClient } from "@prisma/client";
 
 export default class PrismaShopOwnerRepository implements IShopOwnerRepository {

@@ -1,7 +1,7 @@
-import { Transaction } from "../../infrastructure/db/prisma/transaction.repository";
-import IUserRepository from "../../domain/repositories/user.repositoty";
-import CreateUserCommand from "../command/create-user.command";
-import { User } from "../../domain/entities/user.entity";
+import { Transaction } from "@app/infrastructure/db/prisma/transaction.repository";
+import IUserRepository from "@app/domain/repositories/user.repositoty";
+import CreateUserCommand from "@app/application/command/create-user.command";
+import { User } from "@app/domain/entities/user.entity";
 
 export class CreateUserUC {
   private transaction: Transaction;

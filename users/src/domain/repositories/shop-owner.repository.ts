@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { ShopOwner } from "./../entities/shopowner.entity";
+import { ShopOwner } from "@app/domain/entities/shopowner.entity";
 
 export default interface IShopOwnerRepository {
   findAllShopOwners(

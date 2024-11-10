@@ -1,5 +1,5 @@
 import { UUID } from "crypto";
-import { Customer } from "../entities/customer.entity";
+import { Customer } from "@app/domain/entities/customer.entity";
 import { Prisma, PrismaClient, User } from "@prisma/client";
 
 export default interface ICustomerRepository {

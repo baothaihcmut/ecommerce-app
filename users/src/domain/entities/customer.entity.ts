@@ -1,4 +1,3 @@
-import { UUID } from "crypto";
 import { User } from "./user.entity";
 
 export class Customer {

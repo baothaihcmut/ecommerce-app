@@ -1,6 +1,6 @@
 import { UUID } from "crypto";
-import { Shipper } from "../../../domain/entities/shipper.entity"; // Adjust path as necessary
-import IShipperRepository from "../../../domain/repositories/shipper.repository"; // Adjust path as necessary
+import { Shipper } from "@app/domain/entities/shipper.entity"; // Adjust path as necessary
+import IShipperRepository from "@app/domain/repositories/shipper.repository"; // Adjust path as necessary
 import { PrismaClient } from "@prisma/client";
 
 export default class PrismaShipperRepository implements IShipperRepository {

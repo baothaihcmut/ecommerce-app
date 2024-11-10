@@ -1,5 +1,5 @@
 import { Customer, PrismaClient, Shipper, ShopOwner } from "@prisma/client";
-import { User } from "./../entities/user.entity";
+import { User } from "@app/domain/entities/user.entity";
 export default interface IUserRepository {
   createUser(
     user: Omit<User, "id" | "customer" | "shipper" | "shopOwner">,

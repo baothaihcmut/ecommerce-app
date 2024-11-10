@@ -1,5 +1,5 @@
 import { UUID } from "crypto";
-import { Shipper } from "./../entities/shipper.entity";
+import { Shipper } from "@app/domain/entities/shipper.entity";
 import { PrismaClient } from "@prisma/client";
 
 export default interface IShipperRepository {
