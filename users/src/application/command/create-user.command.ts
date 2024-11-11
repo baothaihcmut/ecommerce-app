@@ -12,7 +12,6 @@ interface ShipperDetail {
 interface ShopOwnerDetail {}
 
 export default class CreateUserCommand {
-  public readonly id: string;
   public firstName: string;
   public lastName: string;
   public email: string;
@@ -20,16 +19,17 @@ export default class CreateUserCommand {
   public username: string;
   public password: string;
   public currentRefreshToken?: string;
-  public dateOfBirth: Date;
+  public dateOfBirth?: Date;
   public gender: Gender;
   public addressLine1: string;
   public addressLine2?: string;
   public city: string;
   public nation: string;
   public role: Role;
-  public detail: CustomerDetail | ShipperDetail | ShopOwnerDetail;
+  public customer?: CustomerDetail;
+  public shipper?: ShipperDetail;
+  public shopOwner?: ShopOwnerDetail;
   constructor(
-    id: string,
     firstName: string,
     lastName: string,
     email: string,
@@ -43,9 +43,10 @@ export default class CreateUserCommand {
     city: string,
     nation: string,
     role: Role,
-    detail: CustomerDetail | ShipperDetail | ShopOwnerDetail
+    customer?: CustomerDetail,
+    shipper?: ShipperDetail,
+    showOwner?: ShopOwnerDetail
   ) {
-    this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
@@ -59,23 +60,10 @@ export default class CreateUserCommand {
     this.city = city;
     this.nation = nation;
     this.role = role;
-    this.detail = detail;
+    this.customer = customer;
+    this.shipper = shipper;
+    this.shopOwner = showOwner;
+
     // Add any validations or domain rules here
-  }
-  toEntity(): User {
-    const user = new User(this);
-    if (user.role === Role.Customer) {
-      user.customer = this.detail as Customer;
-      return user;
-    }
-    if (user.role === Role.Shipper) {
-      user.shipper = this.detail as Shipper;
-      return user;
-    }
-    if (user.role === Role.ShopOwner) {
-      user.shopOwner = this.detail as ShopOwner;
-      return user;
-    }
-    return user;
   }
 }

@@ -10,7 +10,7 @@ class PrismaUserRepository {
         const res = (await db.user.create({
             data: user,
         }));
-        if (user.role === role_enum_1.Role.Customer) {
+        if (user.role === role_enum_1.Role.ROLE_CUSTOMER) {
             if (!user.customer) {
                 throw new Error("Lack of customer detail");
             }
@@ -19,7 +19,7 @@ class PrismaUserRepository {
             }));
             res.customer = customer;
         }
-        else if (user.role === role_enum_1.Role.Shipper) {
+        else if (user.role === role_enum_1.Role.ROLE_SHIPPER) {
             if (!user.shipper) {
                 throw new Error("Lack of customer detail");
             }
@@ -28,7 +28,7 @@ class PrismaUserRepository {
             }));
             res.shipper = shipper;
         }
-        else if (user.role === role_enum_1.Role.ShopOwner) {
+        else if (user.role === role_enum_1.Role.ROLE_SHOPOWNER) {
             if (!user.shipper) {
                 throw new Error("Lack of customer detail");
             }
@@ -55,7 +55,7 @@ class PrismaUserRepository {
             },
             data: user,
         }));
-        if (res.role == role_enum_1.Role.Customer && user.customer) {
+        if (res.role == role_enum_1.Role.ROLE_CUSTOMER && user.customer) {
             const customerDetail = (await db.customer.update({
                 where: {
                     userId: id,
@@ -65,7 +65,7 @@ class PrismaUserRepository {
             res.customer = customerDetail;
             return res;
         }
-        if (res.role == role_enum_1.Role.Shipper && user.shipper) {
+        if (res.role == role_enum_1.Role.ROLE_SHIPPER && user.shipper) {
             const shipperDetail = (await db.shipper.update({
                 where: {
                     userId: id,
@@ -75,7 +75,7 @@ class PrismaUserRepository {
             res.shipper = shipperDetail;
             return res;
         }
-        if (res.role == role_enum_1.Role.ShopOwner && user.shopOwner) {
+        if (res.role == role_enum_1.Role.ROLE_SHOPOWNER && user.shopOwner) {
             const shopOwnerDetail = (await db.shopOwner.update({
                 where: {
                     userId: id,

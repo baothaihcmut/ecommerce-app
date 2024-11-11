@@ -9,13 +9,14 @@ const user_repositoty_1 = __importDefault(require("../infrastructure/db/prisma/u
 const shipper_repository_1 = __importDefault(require("../infrastructure/db/prisma/shipper.repository"));
 const shop_owner_repository_1 = __importDefault(require("../infrastructure/db/prisma/shop-owner.repository"));
 const create_user_usecase_1 = require("../application/usecase/create-user.usecase");
-const user_handler_1 = require("../interface/delivery/kafka/handler/user.handler");
+const grpc_js_1 = require("@grpc/grpc-js");
+const users_1 = require("../infrastructure/proto/com/ecommerceapp/v1/users");
+const users_controller_1 = require("../interface/delivery/grpc/controllers/users.controller");
 class Server {
     constructor(args) {
-        this.kafka = args.kafka;
+        this.grpc = args.grpc;
         this.prisma = args.prisma;
         this.config = args.config;
-        this.router = args.router;
     }
     initServer() {
         //init repository
@@ -25,25 +26,17 @@ class Server {
         const shopOwnerRepository = new shop_owner_repository_1.default(this.prisma);
         //init use case
         const createUserUC = new create_user_usecase_1.CreateUserUC(transactionRepository, userRepository);
-        //init handler
-        const userHandler = new user_handler_1.UserHandler(createUserUC);
-        userHandler.initHandler(this.router);
+        //init conteoller
+        this.grpc.addService(users_1.UsersServiceService, (0, users_controller_1.UserService)(createUserUC));
     }
     run() {
-        const consumer = this.kafka.consumer({ groupId: this.config.kafkaConfig.groupId });
-        const runConsumer = async () => {
-            await consumer.connect();
-            const topics = Object.keys(this.router.mapHandler);
-            await Promise.all(topics.map(topic => consumer.subscribe({ topic, fromBeginning: true })));
-            await consumer.run({
-                eachMessage: async ({ topic, partition, message }) => {
-                    const data = message.value ? JSON.parse(message.value.toString()) : undefined;
-                    this.router.mapHandler[topic](data);
-                }
-            });
-        };
-        console.log("Service running");
-        runConsumer().catch(console.error);
+        console.log(this.config.serverConfig.port);
+        this.grpc.bindAsync(`localhost:${this.config.serverConfig.port}`, grpc_js_1.ServerCredentials.createInsecure(), (err, port) => {
+            if (err) {
+                throw err;
+            }
+            console.log(`Server is running on port ${this.config.serverConfig.port}`);
+        });
     }
 }
 exports.Server = Server;

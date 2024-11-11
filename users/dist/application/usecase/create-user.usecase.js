@@ -8,7 +8,7 @@ class CreateUserUC {
     }
     async createUser(createUserCommand) {
         return await this.transaction.executeTransaction(async (prismaClient) => {
-            const res = await this.userRepository.createUser(createUserCommand.toEntity(), prismaClient);
+            const res = await this.userRepository.createUser(createUserCommand, prismaClient);
             return res;
         });
     }

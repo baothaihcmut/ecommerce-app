@@ -4,9 +4,9 @@ import { User } from "./user.entity";
 export class Shipper {
   public readonly userId: string;
   public user: User;
-  public shipmentInventoryId?: string;
+  public shipmentInventoryId: string;
 
-  constructor(userId: string, user: User, shipmentInventoryId?: string) {
+  constructor(userId: string, user: User, shipmentInventoryId: string) {
     this.userId = userId;
     this.user = user;
     this.shipmentInventoryId = shipmentInventoryId;

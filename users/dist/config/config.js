@@ -30,16 +30,10 @@ const loadConfig = () => {
     dotenv.config();
     const envSchema = Joi.object({
         NODE_ENV: Joi.string()
-            .valid('development', 'production', 'test')
-            .default('development'),
-        SERVER_PORT: Joi.number()
-            .default(3000),
-        DATABASE_URL: Joi.string()
-            .uri()
-            .required(),
-        KAFKA_BROKER: Joi.string().default("localhost:9092"),
-        KAFKA_CLIENTID: Joi.string().default("user_service"),
-        KAFKA_GROUPID: Joi.string().default("user_group")
+            .valid("development", "production", "test")
+            .default("development"),
+        SERVER_PORT: Joi.number().default(3000),
+        DATABASE_URL: Joi.string().uri().required(),
     }).unknown(true); // Allow additional environment variables
     const { error, value: envVars } = envSchema.validate(process.env);
     if (error) {
@@ -47,17 +41,12 @@ const loadConfig = () => {
     }
     return {
         serverConfig: {
-            port: envVars.PORT,
+            port: envVars.SERVER_PORT,
             env: envVars.NODE_ENV,
         },
         databaseConfig: {
             url: envVars.DATABASE_URL,
         },
-        kafkaConfig: {
-            broker: envVars.KAFKA_BROKER,
-            clientId: envVars.KAFKA_CLIENTID,
-            groupId: envVars.KAFKA_GROUPID,
-        }
     };
 };
 exports.loadConfig = loadConfig;

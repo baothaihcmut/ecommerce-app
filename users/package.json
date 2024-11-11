@@ -4,21 +4,26 @@
   "main": "main.js",
   "type": "commonjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:dev": "npx ts-node -r tsconfig-paths/register src/main.ts",
+    "start:prod": "NODE_ENV=production node dist/main.js",
+    "build":"npx tsc && npx tsc-alias",
+    "proto-gen":"./proto.sh",
+    "db:migate:dev": "npx prisma migrate dev"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "@types/google-protobuf": "^3.15.12",
     "@types/node": "^22.9.0",
-    "grpc_tools_node_protoc_ts": "^5.3.3",
-    "grpc-tools": "^1.12.4",
     "ts-node": "^10.9.2",
+    "ts-proto": "^2.2.5",
+    "tsc-alias": "^1.8.10",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.6.3"
   },
   "dependencies": {
+    "@grpc/grpc-js": "^1.12.2",
     "@prisma/client": "^5.22.0",
     "dotenv": "^16.4.5",
     "joi": "^17.13.3",

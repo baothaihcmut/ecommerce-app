@@ -13,27 +13,28 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 // Define your enums first
 enum Gender {
+  unspecified
   male
   female
   other
 }
 
 enum Role {
+  unspecified
   customer
   shipper
   shop_owner
 }
 
 model User {
-  id                  String    @id @default(uuid())     // UUID primary key
+  id                  String   @id @default(uuid()) // UUID primary key
   firstName           String
   lastName            String
-  email               String    @unique
-  phoneNumber         String    @unique
-  username            String    @unique
+  email               String   @unique
+  phoneNumber         String   @unique
+  username            String   @unique
   password            String
   currentRefreshToken String?
   dateOfBirth         DateTime
@@ -44,27 +45,26 @@ model User {
   nation              String
   role                Role
 
-  customer            Customer?
-  shipper             Shipper?
-  shopOwner           ShopOwner?
-
+  customer  Customer?
+  shipper   Shipper?
+  shopOwner ShopOwner?
 }
 
 model Customer {
-  point  Int     @default(0)          
+  point  Int    @default(0)
   // Relationship to User model
-  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId String @id 
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @id
 }
 
-model Shipper{
-  userId String @id
-  user User @relation(fields: [userId], references: [id],onDelete: Cascade)
+model Shipper {
+  userId              String  @id
+  user                User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   shipmentInventoryId String?
 }
 
-model ShopOwner{
-  userId String @id
-  user User @relation(fields: [userId],references: [id],onDelete: Cascade)
-  numOfShop Int @default(0)
+model ShopOwner {
+  userId    String @id
+  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  numOfShop Int    @default(0)
 }

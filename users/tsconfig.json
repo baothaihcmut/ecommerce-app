@@ -5,7 +5,7 @@
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    
+    "baseUrl": "./",
     "outDir": "dist",
     "paths": {
       "@app/*": ["./src/*"]

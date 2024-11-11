@@ -15,7 +15,7 @@ export class CreateUserUC {
     return await this.transaction.executeTransaction<User>(
       async (prismaClient): Promise<User> => {
         const res = await this.userRepository.createUser(
-          createUserCommand.toEntity(),
+          createUserCommand as User,
           prismaClient
         );
         return res;
