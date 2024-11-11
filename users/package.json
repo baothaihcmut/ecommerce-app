@@ -11,7 +11,10 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@types/google-protobuf": "^3.15.12",
     "@types/node": "^22.9.0",
+    "grpc_tools_node_protoc_ts": "^5.3.3",
+    "grpc-tools": "^1.12.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3"
   },
@@ -19,7 +22,6 @@
     "@prisma/client": "^5.22.0",
     "dotenv": "^16.4.5",
     "joi": "^17.13.3",
-    "kafkajs": "^2.2.4",
     "prisma": "^5.22.0",
     "users": "file:",
     "uuid": "^11.0.2"
