@@ -8,6 +8,8 @@ import { CreateUserUC } from "../application/usecase/create-user.usecase";
 import { Server as GRPCServer, ServerCredentials } from "@grpc/grpc-js";
 import { UsersServiceService } from "@app/infrastructure/proto/com/ecommerceapp/v1/users";
 import { UserService } from "@app/interface/delivery/grpc/controllers/users.controller";
+import { UpdateUserUC } from "@app/application/usecase/update.user.usecase";
+import ValidateUserUC from "@app/application/usecase/validate-user.usecase";
 type initServer = {
   grpc: GRPCServer;
   prisma: PrismaClient;
@@ -36,8 +38,16 @@ export class Server {
       transactionRepository,
       userRepository
     );
+    const updateUserUC = new UpdateUserUC(
+      transactionRepository,
+      userRepository
+    );
+    const validateUserUC = new ValidateUserUC(userRepository);
     //init conteoller
-    this.grpc.addService(UsersServiceService, UserService(createUserUC));
+    this.grpc.addService(
+      UsersServiceService,
+      UserService(createUserUC, updateUserUC, validateUserUC)
+    );
   }
 
   run() {

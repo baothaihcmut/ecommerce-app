@@ -1,36 +1,32 @@
 {
-  "name": "users",
+  "name": "api-gateway",
   "version": "1.0.0",
-  "main": "main.js",
-  "type": "commonjs",
+  "main": "index.js",
   "scripts": {
     "start:dev": "npx ts-node -r tsconfig-paths/register src/main.ts",
     "start:prod": "NODE_ENV=production node dist/main.js",
     "build": "npx tsc && npx tsc-alias",
-    "proto-gen": "./proto.sh",
-    "db:migate:dev": "npx prisma migrate dev"
+    "proto-gen": "./proto.sh"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@types/express": "^5.0.0",
     "@types/node": "^22.9.0",
     "ts-node": "^10.9.2",
-    "ts-proto": "^2.2.5",
-    "tsc-alias": "^1.8.10",
-    "tsconfig-paths": "^4.2.0",
+    "ts-proto": "^2.2.7",
     "typescript": "^5.6.3"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.12.2",
-    "@prisma/client": "^5.22.0",
-    "@types/bcrypt": "^5.0.2",
-    "bcrypt": "^5.1.1",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
     "dotenv": "^16.4.5",
+    "express": "^4.21.1",
     "joi": "^17.13.3",
-    "prisma": "^5.22.0",
-    "users": "file:",
-    "uuid": "^11.0.2"
+    "tsc-alias": "^1.8.10",
+    "tsconfig-paths": "^4.2.0"
   }
 }

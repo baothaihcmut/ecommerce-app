@@ -17,4 +17,32 @@ export default interface IUserRepository {
     prisma?: PrismaClient
   ): Promise<User[]>;
   findUserByID(id: string, prisma?: PrismaClient): Promise<User>;
+  findOneUserByCondition(
+    condition: Partial<
+      Omit<
+        User,
+        | "id"
+        | "customer"
+        | "shipper"
+        | "shopOwner"
+        | "password"
+        | "currentRefreshToken"
+      >
+    >,
+    primaClient?: PrismaClient
+  ): Promise<User>;
+  findManyUserByCondition(
+    condition: Partial<
+      Omit<
+        User,
+        | "id"
+        | "customer"
+        | "shipper"
+        | "shopOwner"
+        | "password"
+        | "currentRefreshToken"
+      >
+    >,
+    primaClient?: PrismaClient
+  ): Promise<User[]>;
 }

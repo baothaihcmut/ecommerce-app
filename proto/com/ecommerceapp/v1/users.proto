@@ -1,0 +1,159 @@
+syntax = "proto3";
+
+
+package com.ecommerceapp.v1.users;
+import "google/protobuf/timestamp.proto";
+
+service UsersService{
+    rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {} 
+    rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {}
+    rpc ChangePassword(ChangePasswordRequest) returns (Empty){}
+    rpc UpdateRefreshToken(UpdateRefreshTokenRequest) returns (Empty){}
+    rpc ValidateUser(ValidateUserRequest) returns (Empty){}
+
+}
+
+enum Gender {
+    GENDER_UNSPECIFIED = 0;
+    GENDER_MALE = 1;
+    GENDER_FEMALE = 2;
+    GENDER_OTHER = 3;
+}
+  
+  // Role Enum
+enum Role {
+    ROLE_UNSPECIFIED = 0;
+    ROLE_CUSTOMER = 1;
+    ROLE_SHIPPER = 2;
+    ROLE_SHOPOWNER = 3;
+}
+message UserId{
+    string user_id=1;
+}
+message CreateUserRequest {
+    string first_name = 1;
+    string last_name = 2;
+    string email = 3;
+    string phone_number = 4;
+    string username = 5;
+    string password = 6;
+    string address_line1 = 7;
+    string address_line2 = 8;
+    string city = 9;
+    string nation = 10;
+    Gender gender = 11;
+    Role role = 12;
+    google.protobuf.Timestamp date_of_birth = 13;
+    // Optional fields for one-to-one relationships
+    optional CreateCustomerCommand customer = 14;
+    optional CreateShipperCommand shipper = 15;
+    optional CreateCustomerCommand shop_owner = 16;
+}
+message CreateCustomerCommand {
+    // Define fields for Customer here if needed
+}
+message CreateShopOwnerCommand {
+    // Define fields for ShopOwner here if needed
+}
+  
+message CreateShipperCommand {
+// Define fields for Shipper here if needed
+    string shipment_inventory_id = 1;
+}
+  
+message Customer {
+    // Define fields for Customer here if needed
+    uint64 point = 1;
+
+}
+  
+message Shipper {
+// Define fields for Shipper here if needed
+    string shipment_inventory_id = 1;
+}
+message ShopOwner {
+// Define fields for ShopOwner here if needed
+ uint64 num_of_shop = 1;
+}
+
+
+
+message CreateUserResponse {
+    string id = 1;
+    string first_name = 2;
+    string last_name = 3;
+    string email = 4;
+    string phone_number = 5;
+    string username = 6;
+    string address_line_1 = 7;
+    optional string address_line_2 = 8;
+    string city = 9;
+    string nation = 10;
+    Gender gender = 11;
+    Role role = 12;
+    google.protobuf.Timestamp date_of_birth = 13;
+    optional Customer customer = 14;
+    optional Shipper shipper = 15;
+    optional ShopOwner shop_owner = 16;
+}
+message UpdateUserInfoRequest{
+    optional string first_name = 1;
+    optional string last_name = 2;
+    optional string phone_number = 3;
+    optional string address_line_1 = 4;
+    optional string address_line_2 = 5;
+    optional string city = 6;
+    optional string nation = 7;
+    optional Gender gender = 8;
+    optional Role role = 9;
+    optional google.protobuf.Timestamp date_of_birth = 10;
+    optional UpdateCustomerRequest customer = 11;
+    optional UpdateShipperRequest shipper = 12;
+    optional UpdateShopOwnerRequest shop_owner = 13;
+}
+
+message UpdateCustomerRequest{
+
+}
+message UpdateShipperRequest{
+    optional string shipment_inventory_id = 1;
+}
+message UpdateShopOwnerRequest{
+
+}
+message UpdateUserRequest {
+    UserId user_id =1;
+    UpdateUserInfoRequest update_info=2;
+}
+message UpdateUserResponse{
+    string id = 1;
+    string first_name = 2;
+    string last_name = 3;
+    string phone_number = 4;
+    string address_line_1 = 5;
+    optional string address_line_2 = 6;
+    string city = 7;
+    string nation = 8;
+    Gender gender = 9;
+    Role role = 10;
+    google.protobuf.Timestamp date_of_birth = 11;
+    optional Customer customer = 12;
+    optional Shipper shipper = 13;
+    optional ShopOwner shop_owner = 14;
+}
+
+message ChangePasswordRequest{
+    string user_id=1;
+    string old_password =2;
+    string new_password=3;
+}
+
+message UpdateRefreshTokenRequest {
+    string user_id=1;
+    string refresh_token=2;
+}
+message ValidateUserRequest{
+    string username=1;
+    string password=2;
+}
+message Empty{}

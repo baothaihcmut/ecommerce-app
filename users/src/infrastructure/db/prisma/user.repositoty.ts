@@ -13,6 +13,46 @@ export default class PrismaUserRepository implements IUserRepository {
   constructor(prismaClient: PrismaClient) {
     this.prismaClient = prismaClient;
   }
+  async findOneUserByCondition(
+    condition: Partial<
+      Omit<
+        User,
+        | "id"
+        | "customer"
+        | "shipper"
+        | "shopOwner"
+        | "password"
+        | "currentRefreshToken"
+      >
+    >,
+    primaClient?: PrismaClient
+  ): Promise<User> {
+    const db = primaClient || this.prismaClient;
+    const res = await db.user.findFirst({
+      where: condition,
+    });
+    return res as User;
+  }
+  async findManyUserByCondition(
+    condition: Partial<
+      Omit<
+        User,
+        | "id"
+        | "customer"
+        | "shipper"
+        | "shopOwner"
+        | "password"
+        | "currentRefreshToken"
+      >
+    >,
+    primaClient?: PrismaClient
+  ): Promise<User[]> {
+    const db = primaClient || this.prismaClient;
+    const res = await db.user.findMany({
+      where: condition,
+    });
+    return res as User[];
+  }
 
   async createUser(user: User, prisma?: PrismaClient): Promise<User> {
     const db = prisma || this.prismaClient;
